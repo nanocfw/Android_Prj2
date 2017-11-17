@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantidade de Números a Sortear:"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/edtQtdItens"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginTop="20dp"
+            android:hint="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Limites para Sorteio"
+            android:layout_marginRight="5dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edtminimo"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Mínimo"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="à"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/edtmaximo"
+            android:layout_marginLeft="5dp"
+            android:layout_width="75dp"
+            android:layout_gravity="right"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:hint="Máximo"
+            android:textSize="14dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecionar Critério:"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp">
+
+        <RadioGroup
+            android:id="@+id/rgGrupo">
+
+            <RadioButton
+                android:id="@+id/rbAleatorio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Sortear Números Aleatórios" />
+
+            <RadioButton
+                android:id="@+id/rbSortearItemLista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sortear Item da Lista"/>
+
+            <RadioButton
+                android:id="@+id/rbSortearCriterio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sortear Critério Automaticamente"/>
+
+            <RadioButton
+                android:id="@+id/rbCrescente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ordenar forma Crescente" />
+
+            <RadioButton
+                android:id="@+id/rbDecrescente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ordenar forma Decrescente" />
+
+            <RadioButton
+                android:id="@+id/rbPar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listar Números Pares" />
+
+            <RadioButton
+                android:id="@+id/rbImpar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listar Números Ímpares" />
+        </RadioGroup>
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnsorteio"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sortear"
+            android:textColorHint="@android:color/white"
+            android:background="#696969"
+            android:onClick="sortear"/>
+    </GridLayout>
+</LinearLayout>
