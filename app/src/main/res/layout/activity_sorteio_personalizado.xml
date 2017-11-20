@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".telas.SorteioPersonalizadoActivity">
 
     <TextView
         android:id="@+id/tvTipoSorteio"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:textStyle="bold"
-        />
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edtadicionaritem"
@@ -17,23 +18,21 @@
         android:layout_height="wrap_content"
         android:hint="Adicionar um Item"
         android:textSize="14dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnAdicionarItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#9C9C9C"
         android:hint="Adicionar"
-        android:onClick="sortear"
-        android:textColorHint="@android:color/white"
-        android:background="#9C9C9C"/>
+        android:textColorHint="@android:color/white" />
 
 
-        <ListView
-            android:id="@+id/lvItens"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <ListView
+        android:id="@+id/lvItens"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,10 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="#696969"
             android:hint="Sortear"
             android:onClick="sortear"
-            android:textColorHint="@android:color/white"
-            android:background="#696969"/>
+            android:textColorHint="@android:color/white" />
     </RelativeLayout>
 
 </LinearLayout>

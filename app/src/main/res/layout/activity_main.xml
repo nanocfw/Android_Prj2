@@ -82,12 +82,14 @@
 
         <Button
             android:id="@+id/btnsorteioPersonalizado"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#696969"
             android:hint="Personalizar Sorteio"
             android:onClick="sorteioPersonalizado"
-            android:textColorHint="@android:color/white"
-            android:background="#696969"/>
+            android:textColorHint="@android:color/white" />
     </RelativeLayout>
 </LinearLayout>

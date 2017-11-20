@@ -1,16 +1,17 @@
-package com.example.luanabelusso.aps_android;
+package com.example.luanabelusso.aps_android.telas;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.luanabelusso.aps_android.R;
+
 import java.util.ArrayList;
 
-public class ResultSorteioPersActivity  extends AppCompatActivity {
+public class ResultSorteioPersActivity  extends DefaultActivity {
 
     private ArrayList<String> dados;
     private String descricaoSorteio;
@@ -20,7 +21,7 @@ public class ResultSorteioPersActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resultsorteiopers);
+        setContentView(R.layout.activity_result_sorteio_pers);
 
         Bundle args = getIntent().getExtras();
         dados = args.getStringArrayList("dados");
@@ -28,7 +29,7 @@ public class ResultSorteioPersActivity  extends AppCompatActivity {
 
         list = (ListView) findViewById(R.id.listView2);
 
-        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_adapterresultpers,R.id.tv, dados);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_adapter_result_pers,R.id.tv, dados);
         list.setAdapter(adapter);
 
         TextView tvResult = (TextView) findViewById(R.id.tvResultado);

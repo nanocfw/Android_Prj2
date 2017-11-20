@@ -3,4 +3,5 @@
     <color name="colorPrimary">#483D8B</color>
     <color name="colorPrimaryDark">#8B8682</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="itens_sorteio_text_color">#ff131313</color>
 </resources>

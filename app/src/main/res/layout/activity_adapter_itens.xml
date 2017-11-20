@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/txtDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/itens_sorteio_text_margin_right"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:layout_marginRight="@dimen/itens_sorteio_text_margin_right"
+        android:layout_marginStart="@dimen/itens_sorteio_text_margin_left"
+        android:text="asdadasasdasdasdasdsadasdasdasdasdsadasdasdasdasdasdasdasdasdasds"
+        android:textColor="@color/itens_sorteio_text_color" />
+
+    <ImageButton
+        android:id="@+id/btnEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/itens_sorteio_btn_editar_margin_right"
+        android:layout_marginRight="@dimen/itens_sorteio_btn_editar_margin_right"
+        android:src="@drawable/ic_border_color_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/btnDeletar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/itens_sorteio_btn_delete_margin_right"
+        android:layout_marginRight="@dimen/itens_sorteio_btn_delete_margin_right"
+        android:src="@drawable/ic_delete_black_18dp" />
+
+</RelativeLayout>

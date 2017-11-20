@@ -1,84 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".telas.OpcaoSorteioActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Quantidade de Números a Sortear:"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtQtdItens"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:layout_marginTop="20dp"
-            android:hint="1"/>
+            android:hint="1"
+            android:inputType="number" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Limites para Sorteio"
             android:layout_marginRight="5dp"
-            android:textStyle="bold"/>
+            android:text="Limites para Sorteio"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtminimo"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:hint="Mínimo"
-            android:textSize="14dp"/>
+            android:inputType="number"
+            android:textSize="14dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="à"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtmaximo"
-            android:layout_marginLeft="5dp"
             android:layout_width="75dp"
-            android:layout_gravity="right"
             android:layout_height="match_parent"
-            android:inputType="number"
+            android:layout_gravity="right"
+            android:layout_marginLeft="5dp"
             android:hint="Máximo"
-            android:textSize="14dp"/>
+            android:inputType="number"
+            android:textSize="14dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Selecionar Critério:"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <GridLayout
@@ -87,8 +88,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp">
 
-        <RadioGroup
-            android:id="@+id/rgGrupo">
+        <RadioGroup android:id="@+id/rgGrupo">
 
             <RadioButton
                 android:id="@+id/rbAleatorio"
@@ -101,13 +101,13 @@
                 android:id="@+id/rbSortearItemLista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sortear Item da Lista"/>
+                android:text="Sortear Item da Lista" />
 
             <RadioButton
                 android:id="@+id/rbSortearCriterio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sortear Critério Automaticamente"/>
+                android:text="Sortear Critério Automaticamente" />
 
             <RadioButton
                 android:id="@+id/rbCrescente"
@@ -142,12 +142,12 @@
 
         <Button
             android:id="@+id/btnsorteio"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sortear"
-            android:textColorHint="@android:color/white"
+            android:layout_gravity="bottom"
             android:background="#696969"
-            android:onClick="sortear"/>
+            android:hint="Sortear"
+            android:onClick="sortear"
+            android:textColorHint="@android:color/white" />
     </GridLayout>
 </LinearLayout>

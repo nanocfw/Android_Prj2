@@ -1,8 +1,7 @@
-package com.example.luanabelusso.aps_android;
+package com.example.luanabelusso.aps_android.telas;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,18 +9,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.graphics.Color;
 
+import com.example.luanabelusso.aps_android.R;
+
 /**
  * Created by Luana Belusso on 08/10/2017.
  */
 
-public class OpcaoSorteioActivity extends AppCompatActivity {
+public class OpcaoSorteioActivity extends DefaultActivity {
 
     private RadioGroup rgOpcoes;
     private Button btnAcao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_opcaosorteio);
+        setContentView(R.layout.activity_opcao_sorteio);
 
         rgOpcoes = (RadioGroup) findViewById(R.id.rgGrupo);
         btnAcao = (Button) findViewById(R.id.btnsorteio);
