@@ -1,7 +1,10 @@
 package com.example.luanabelusso.aps_android.banco.controllers;
 
+import android.database.Cursor;
+
 import com.example.luanabelusso.aps_android.banco.DataBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.luanabelusso.aps_android.entidades.ItemResultadoSorteio;
@@ -24,14 +27,37 @@ public class ControllerItemResultadoSorteio extends DataBase {
     }
 
     public ItemResultadoSorteio selecionarItemResultado(int id) {
-        return null;
+        String where = ItemResultadoSorteio.ID + " = " + id;
+        Cursor dados = selecionar(ItemResultadoSorteio.TABELA, where, new ItemResultadoSorteio().getAllFields());
+        if (dados == null || dados.getCount() == 0)
+            return null;
+
+        ItemResultadoSorteio aux = new ItemResultadoSorteio();
+        aux.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.ID)));
+        aux.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.SORTEIO)));
+        aux.setResultado(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.RESULTADO)));
+        return aux;
     }
 
-    public List<ItemResultadoSorteio> getListaItensResultado(int id) {
-        return null;
+    public List<ItemResultadoSorteio> getListaItensResultado(int idSorteio) {
+        List<ItemResultadoSorteio> aux = new ArrayList<>();
+        String where = ItemResultadoSorteio.SORTEIO + " = " + idSorteio;
+        Cursor dados = selecionar(ItemResultadoSorteio.TABELA, where, new ItemResultadoSorteio().getAllFields());
+        if (dados == null || dados.getCount() == 0)
+            return aux;
+
+        while (dados.moveToNext()) {
+            ItemResultadoSorteio itemResultadoSorteio = new ItemResultadoSorteio();
+            itemResultadoSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.ID)));
+            itemResultadoSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.SORTEIO)));
+            itemResultadoSorteio.setResultado(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.RESULTADO)));
+            aux.add(itemResultadoSorteio);
+        }
+        return aux;
     }
 
     public boolean deletarItemResultado(int id) {
-        return false;
+        String where = ItemResultadoSorteio.ID + " = " + id;
+        return delete(ItemResultadoSorteio.TABELA, where) > 0;
     }
 }
