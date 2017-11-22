@@ -45,15 +45,18 @@ public class ControllerItemResultadoSorteio extends DataBase {
         Cursor dados = selecionar(ItemResultadoSorteio.TABELA, where, new ItemResultadoSorteio().getAllFields());
         if (dados == null || dados.getCount() == 0)
             return aux;
-
-        while (dados.moveToNext()) {
-            ItemResultadoSorteio itemResultadoSorteio = new ItemResultadoSorteio();
-            itemResultadoSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.ID)));
-            itemResultadoSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.SORTEIO)));
-            itemResultadoSorteio.setResultado(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.RESULTADO)));
-            aux.add(itemResultadoSorteio);
+        try {
+            while (dados.moveToNext()) {
+                ItemResultadoSorteio itemResultadoSorteio = new ItemResultadoSorteio();
+                itemResultadoSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.ID)));
+                itemResultadoSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.SORTEIO)));
+                itemResultadoSorteio.setResultado(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.RESULTADO)));
+                aux.add(itemResultadoSorteio);
+            }
+            return aux;
+        } finally {
+            dados.close();
         }
-        return aux;
     }
 
     public boolean deletarItemResultado(int id) {

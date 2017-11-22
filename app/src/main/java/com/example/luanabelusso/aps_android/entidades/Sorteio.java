@@ -4,10 +4,12 @@ import android.content.ContentValues;
 
 import com.example.luanabelusso.aps_android.util.Util;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
+
 import lombok.Data;
 
 /**
@@ -37,17 +39,21 @@ public class Sorteio extends DefaultEntity {
 
     public Sorteio() {
         super();
+        this.tipoCriterio = TipoCriterio.NUMEROS_ALEATORIOS;
         this.dataSorteio = new Date();
+        this.itensSorteio = new ArrayList<>();
+        this.itensResultado = new ArrayList<>();
     }
 
     @Override
     public String getScriptCreate() {
         return "CREATE TABLE " + TABELA + "(" +
                 ID + " integer primary key autoincrement, " +
-                DESCRICAO + " text " +
+                DESCRICAO + " text, " +
                 QNT_RESULTADOS + " integer, " +
                 VL_MINIMO + " integer, " +
                 VL_MAXIMO + " integer, " +
+                TIPO_CRITERIO + " smallint, " +
                 DATA_SORTEIO + " datetime " +
                 ")";
     }

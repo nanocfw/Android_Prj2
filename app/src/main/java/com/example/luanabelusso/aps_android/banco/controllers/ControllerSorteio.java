@@ -16,11 +16,20 @@ import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
 
 public class ControllerSorteio extends DataBase {
     private static ControllerSorteio instance = null;
+    private Sorteio currentSorteio = null;
 
     public static ControllerSorteio getInstance() {
         if (instance == null)
             instance = new ControllerSorteio();
         return instance;
+    }
+
+    public Sorteio getCurrentSorteio() {
+        return currentSorteio;
+    }
+
+    public void setCurrentSorteio(Sorteio currentSorteio) {
+        this.currentSorteio = currentSorteio;
     }
 
     public boolean salvarSorteio(Sorteio sorteio) {

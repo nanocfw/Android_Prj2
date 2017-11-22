@@ -95,42 +95,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:tag="0"
                 android:text="Sortear Números Aleatórios" />
 
             <RadioButton
                 android:id="@+id/rbSortearItemLista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="1"
                 android:text="Sortear Item da Lista" />
 
             <RadioButton
                 android:id="@+id/rbSortearCriterio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="2"
                 android:text="Sortear Critério Automaticamente" />
 
             <RadioButton
                 android:id="@+id/rbCrescente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="3"
                 android:text="Ordenar forma Crescente" />
 
             <RadioButton
                 android:id="@+id/rbDecrescente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="4"
                 android:text="Ordenar forma Decrescente" />
 
             <RadioButton
                 android:id="@+id/rbPar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="5"
                 android:text="Listar Números Pares" />
 
             <RadioButton
                 android:id="@+id/rbImpar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="6"
                 android:text="Listar Números Ímpares" />
         </RadioGroup>
 

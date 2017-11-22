@@ -12,20 +12,13 @@
         android:layout_height="wrap_content"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edtadicionaritem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Adicionar um Item"
-        android:textSize="14dp"
-        android:textStyle="bold" />
-
     <Button
         android:id="@+id/btnAdicionarItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#9C9C9C"
         android:hint="Adicionar"
+        android:onClick="onBtnAdicionarClick"
         android:textColorHint="@android:color/white" />
 
 

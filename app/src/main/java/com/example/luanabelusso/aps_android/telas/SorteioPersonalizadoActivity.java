@@ -1,7 +1,10 @@
 package com.example.luanabelusso.aps_android.telas;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.luanabelusso.aps_android.R;
+import com.example.luanabelusso.aps_android.banco.controllers.ControllerItemSorteio;
+import com.example.luanabelusso.aps_android.banco.controllers.ControllerSorteio;
+import com.example.luanabelusso.aps_android.entidades.ItemSorteio;
+import com.example.luanabelusso.aps_android.telas.adapters.AdapterItensSorteioPersonalizado;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +29,8 @@ import java.util.Collections;
 
 public class SorteioPersonalizadoActivity extends DefaultActivity {
 
-    private ArrayList<String> arraylist;
-    private ArrayAdapter<String> adapter;
-    private EditText edtItem;
+    private AdapterItensSorteioPersonalizado adapter;
     private ListView list;
-    private Button btnAdicionar;
     private int tipoSorteio;
     private String descricaoSorteio;
     private int qtdItens;
@@ -44,41 +48,44 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
         limMin = args.getInt("limMin");
         limMax = args.getInt("limMax");
 
-        edtItem = (EditText) findViewById(R.id.edtadicionaritem);
         list = (ListView) findViewById(R.id.lvItens);
-        btnAdicionar = (Button) findViewById(R.id.btnAdicionarItem);
-
-        arraylist = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_adapter_itens, R.id.txtDescricao, arraylist);
+        adapter = new AdapterItensSorteioPersonalizado(this,
+                ControllerSorteio.getInstance().getCurrentSorteio().getItensSorteio());
 
         list.setAdapter(adapter);
-
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                arraylist.remove(i);
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-        });
-
-        btnAdicionar.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (edtItem.getText().toString().equals("")) return;
-
-                arraylist.add(edtItem.getText().toString());
-                adapter.notifyDataSetChanged();
-                edtItem.setText("");
-            }
-        });
 
         setTipoSorteio();
 
         if (tipoSorteio == 6) {
             aleatorios();
         }
+    }
+
+    public void onBtnAdicionarClick(View v) {
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Informe a descrição do novo item")
+                .setView(input)
+                .setPositiveButton(R.string.STR_OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String descricao = input.getText().toString();
+                        ItemSorteio itemSorteio = new ItemSorteio();
+                        ControllerSorteio.getInstance().getCurrentSorteio().getItensSorteio().add(itemSorteio);
+                        itemSorteio.setSorteio(ControllerSorteio.getInstance().getCurrentSorteio().getId());
+                        itemSorteio.setDescricao(descricao);
+                        ControllerItemSorteio.getInstance().salvarItem(itemSorteio);
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(R.string.STR_CANCEL, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
     }
 
     public void setTipoSorteio() {
@@ -108,37 +115,39 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
     }
 
     public void sortear(View v) {
-        ArrayList<String> list, listOrdenada;
-        list = arraylist;
-        listOrdenada = list;
+//        ArrayList<String> list, listOrdenada;
+//        list = arraylist;
+//        listOrdenada = list;
+//
+//        switch (tipoSorteio) {
+//            case 1:
+//                listOrdenada = sortearCriterio(v, list);
+//                break;
+//            case 2:
+//                listOrdenada = crescente(v, list);
+//                break;
+//            case 3:
+//                listOrdenada = decrescente(v, list);
+//                break;
+//            case 4:
+//                listOrdenada = par(v, list);
+//                break;
+//            case 5:
+//                listOrdenada = impar(v, list);
+//                break;
+//            case 7:
+//                listOrdenada = sortearItemLista(v, list);
+//                break;
+//    }
 
-        switch (tipoSorteio) {
-            case 1:
-                listOrdenada = sortearCriterio(v, list);
-                break;
-            case 2:
-                listOrdenada = crescente(v, list);
-                break;
-            case 3:
-                listOrdenada = decrescente(v, list);
-                break;
-            case 4:
-                listOrdenada = par(v, list);
-                break;
-            case 5:
-                listOrdenada = impar(v, list);
-                break;
-            case 7:
-                listOrdenada = sortearItemLista(v, list);
-                break;
-        }
+//        Intent intent = new Intent(this, ResultSorteioPersActivity.class);
+//        Bundle params = new Bundle();
+//        params.putStringArrayList("dados", listOrdenada);
+//        params.putString("tipoSorteio", descricaoSorteio);
+//        intent.putExtras(params);
+//
+//        startActivity(intent);
 
-        Intent intent = new Intent(this, ResultSorteioPersActivity.class);
-        Bundle params = new Bundle();
-        params.putStringArrayList("dados", listOrdenada);
-        params.putString("tipoSorteio", descricaoSorteio);
-        intent.putExtras(params);
-        startActivity(intent);
     }
 
     public ArrayList<String> sortearCriterio(View v, ArrayList<String> list) {

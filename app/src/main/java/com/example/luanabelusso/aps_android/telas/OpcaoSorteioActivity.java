@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.graphics.Color;
 
 import com.example.luanabelusso.aps_android.R;
+import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
 
 /**
  * Created by Luana Belusso on 08/10/2017.
@@ -19,6 +20,7 @@ public class OpcaoSorteioActivity extends DefaultActivity {
 
     private RadioGroup rgOpcoes;
     private Button btnAcao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,64 +33,38 @@ public class OpcaoSorteioActivity extends DefaultActivity {
         rgOpcoes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton rbSelecionado = findViewById(rgOpcoes.getCheckedRadioButtonId());
 
-                RadioButton rbOpAleatorio = (RadioButton) findViewById(R.id.rbAleatorio);
-
-                if(rbOpAleatorio.isChecked()){
+                if (Integer.parseInt((String) rbSelecionado.getTag()) == 0)
                     btnAcao.setHint("Sortear");
-                }else{
+                else
                     btnAcao.setHint("Criar Lista");
-                }
+
                 btnAcao.setTextColor(Color.parseColor("#FFFFFF"));
             }
         });
     }
 
-    public void sortear(View view){
-        int tipoSorteio=0;
-
-        RadioButton rbOpSortearCriterio = (RadioButton) findViewById(R.id.rbSortearCriterio);
-        RadioButton rbOpCrescente = (RadioButton) findViewById(R.id.rbCrescente);
-        RadioButton rbOpDecrescente = (RadioButton) findViewById(R.id.rbDecrescente);
-        RadioButton rbOpPar = (RadioButton) findViewById(R.id.rbPar);
-        RadioButton rbOpImpar = (RadioButton) findViewById(R.id.rbImpar);
-        RadioButton rbOpAleatorio = (RadioButton) findViewById(R.id.rbAleatorio);
-        RadioButton rbOpItemLista = (RadioButton) findViewById(R.id.rbSortearItemLista);
-
+    public void sortear(View view) {
         EditText edtQtdItens = (EditText) findViewById(R.id.edtQtdItens);
         EditText edtLimMin = (EditText) findViewById(R.id.edtminimo);
         EditText edtLimMax = (EditText) findViewById(R.id.edtmaximo);
-
-        if(rbOpSortearCriterio.isChecked()) {
-            tipoSorteio = 1;
-        }else if(rbOpCrescente.isChecked()) {
-            tipoSorteio = 2;
-        }else if(rbOpDecrescente.isChecked()) {
-            tipoSorteio = 3;
-        }else if(rbOpPar.isChecked()) {
-            tipoSorteio = 4;
-        }else if(rbOpImpar.isChecked()) {
-            tipoSorteio = 5;
-        }else if(rbOpAleatorio.isChecked()) {
-            tipoSorteio = 6;
-        }else if(rbOpItemLista.isChecked()) {
-            tipoSorteio = 7;
-        }
+        RadioButton rbSelecionado = findViewById(rgOpcoes.getCheckedRadioButtonId());
 
         Intent intent = new Intent(this, SorteioPersonalizadoActivity.class);
         Bundle params = new Bundle();
-        params.putInt("tipoSorteio", tipoSorteio);
+        params.putInt("tipoSorteio", Integer.parseInt((String) rbSelecionado.getTag()));
 
-        if(edtQtdItens.getText().length() == 0) {
+        if (edtQtdItens.getText().length() == 0) {
             params.putInt("qtdItens", 1);
-        }else if (Integer.parseInt(edtQtdItens.getText().toString()) > 0) {
+        } else if (Integer.parseInt(edtQtdItens.getText().toString()) > 0) {
             params.putInt("qtdItens", Integer.parseInt(edtQtdItens.getText().toString()));
         }
 
-        if(edtLimMin.getText().length() == 0 || edtLimMin.getText().length() == 0) {
+        if (edtLimMin.getText().length() == 0 || edtLimMin.getText().length() == 0) {
             params.putInt("limMin", 0);
             params.putInt("limMax", 0);
-        }else if (Integer.parseInt(edtLimMin.getText().toString()) > 0 && Integer.parseInt(edtLimMax.getText().toString()) > 0 ) {
+        } else if (Integer.parseInt(edtLimMin.getText().toString()) > 0 && Integer.parseInt(edtLimMax.getText().toString()) > 0) {
             params.putInt("limMin", Integer.parseInt(edtLimMin.getText().toString()));
             params.putInt("limMax", Integer.parseInt(edtLimMax.getText().toString()));
         }

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.luanabelusso.aps_android.R;
 import com.example.luanabelusso.aps_android.banco.DataBase;
+import com.example.luanabelusso.aps_android.banco.controllers.ControllerSorteio;
+import com.example.luanabelusso.aps_android.entidades.Sorteio;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,34 +25,37 @@ public class MainActivity extends AppCompatActivity {
         EditText edtmin = (EditText) findViewById(R.id.edtminimo);
         EditText edtmax = (EditText) findViewById(R.id.edtmaximo);
 
-        int resultado=0;
+        int resultado = 0;
 
-        if(edtmin.getText().length() == 0 || edtmax.getText().length() == 0) {
+        if (edtmin.getText().length() == 0 || edtmax.getText().length() == 0) {
             resultado = sortAleatorio();
-        }else{
+        } else {
             int minimo = Integer.parseInt(edtmin.getText().toString());
             int maximo = Integer.parseInt(edtmax.getText().toString());
 
             if (minimo > 0 && maximo > 0) {
-                resultado = (int) (minimo + (Math.random() * (maximo+1-minimo)));
-            }else{
+                resultado = (int) (minimo + (Math.random() * (maximo + 1 - minimo)));
+            } else {
                 resultado = sortAleatorio();
             }
         }
-        txtresultado.setText(""+ resultado);
+        txtresultado.setText("" + resultado);
     }
 
-    public void sorteioPersonalizado(View view){
+    public void sorteioPersonalizado(View view) {
+        Sorteio sorteio = new Sorteio();
+        ControllerSorteio.getInstance().salvarSorteio(sorteio);
+        ControllerSorteio.getInstance().setCurrentSorteio(sorteio);
         Intent intent = new Intent(this, OpcaoSorteioActivity.class);
         Bundle params = new Bundle();
         startActivity(intent);
     }
 
-    public int sortAleatorio(){
+    public int sortAleatorio() {
         int i;
         double d;
 
-        d = (Math.random()*100);
+        d = (Math.random() * 100);
         d = Math.round(d);
 
         i = (int) d;

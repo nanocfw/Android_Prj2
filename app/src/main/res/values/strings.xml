@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Fast SortApp</string>
+    <string name="STR_NAO">Não</string>
+    <string name="STR_SIM">Sim</string>
+    <string name="STR_CONFIRME">Confirme</string>
+    <string name="STR_CONFIRME_DELETE_ITEM">Realmente deseja deletar o item?</string>
+    <string name="STR_CANCEL">Cancelar</string>
+    <string name="STR_OK">OK</string>
 </resources>

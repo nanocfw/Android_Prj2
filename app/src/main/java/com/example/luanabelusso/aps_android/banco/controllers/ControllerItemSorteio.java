@@ -45,15 +45,19 @@ public class ControllerItemSorteio extends DataBase {
         Cursor dados = selecionar(ItemSorteio.TABELA, where, new ItemSorteio().getAllFields());
         if (dados == null || dados.getCount() == 0)
             return aux;
-
-        while (dados.moveToNext()) {
-            ItemSorteio itemSorteio = new ItemSorteio();
-            itemSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemSorteio.ID)));
-            itemSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemSorteio.SORTEIO)));
-            itemSorteio.setDescricao(dados.getString(dados.getColumnIndexOrThrow(ItemSorteio.DESCRICAO)));
-            aux.add(itemSorteio);
+        try {
+            while (dados.moveToNext()) {
+                ItemSorteio itemSorteio = new ItemSorteio();
+                itemSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemSorteio.ID)));
+                itemSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemSorteio.SORTEIO)));
+                itemSorteio.setDescricao(dados.getString(dados.getColumnIndexOrThrow(ItemSorteio.DESCRICAO)));
+                aux.add(itemSorteio);
+            }
+            return aux;
+        } finally {
+            dados.close();
         }
-        return aux;
+
     }
 
     public boolean deletarItemSorteio(int id) {
