@@ -16,10 +16,10 @@
         android:id="@+id/btnAdicionarItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#9C9C9C"
-        android:hint="Adicionar"
+        android:background="@color/btn_background"
+        android:hint="@string/ADICIONAR"
         android:onClick="onBtnAdicionarClick"
-        android:textColorHint="@android:color/white" />
+        android:textColorHint="@color/white" />
 
 
     <ListView
@@ -37,10 +37,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#696969"
-            android:hint="Sortear"
+            android:background="@color/btn_background"
+            android:hint="@string/BTN_SORTEAR"
             android:onClick="sortear"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@color/white" />
     </RelativeLayout>
 
 </LinearLayout>

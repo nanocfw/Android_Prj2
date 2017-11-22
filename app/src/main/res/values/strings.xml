@@ -6,4 +6,24 @@
     <string name="STR_CONFIRME_DELETE_ITEM">Realmente deseja deletar o item?</string>
     <string name="STR_CANCEL">Cancelar</string>
     <string name="STR_OK">OK</string>
+    <string name="RESULTADO">Resultado:</string>
+    <string name="PERSONALIZAR">Personalizar Sorteio</string>
+    <string name="SORTEAR">Sortear</string>
+    <string name="LIMITE_MAX">Limite Máximo</string>
+    <string name="LIMITE_MIN">Limite Mínimo</string>
+    <string name="OPCAO_SORTEIO_QTDE">Quantidade de Números a Sortear:</string>
+    <string name="OPCAO_SORTEIO_LIMITE">Limites para Sorteio</string>
+    <string name="OPCAO_SORTEIO_MIN">Mínimo</string>
+    <string name="OPCAO_SORTEIO_MAX">Máximo</string>
+    <string name="OPCAO_SORTEIO_CRITERIO">Selecionar Critério:</string>
+    <string name="RADIOBUTTON_ALEATORIO">Sortear Números Aleatórios</string>
+    <string name="RADIOBUTTON_ITEMLISTA">Sortear Item da Lista</string>
+    <string name="RADIOBUTTON_SORTEIOCRITERIO">Sortear Critério Automaticamente</string>
+    <string name="RADIOBUTTON_CRESCENTE">Ordenar forma Crescente</string>
+    <string name="RADIOBUTTON_DECRESCENTE">Ordenar forma Decrescente</string>
+    <string name="RADIOBUTTON_PARES">Listar Números Pares</string>
+    <string name="RADIOBUTTON_IMPARES">Listar Números Ímpares</string>
+    <string name="BTN_SORTEAR">Sortear</string>
+    <string name="BTN_NOVOSORTEIO">Novo Sorteio</string>
+    <string name="ADICIONAR">Adicionar</string>
 </resources>

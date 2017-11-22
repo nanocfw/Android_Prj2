@@ -8,11 +8,11 @@
         android:id="@+id/tvResultado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/itens_sorteio_text_margin_top2"
         android:gravity="center"
-        android:text="Resultado:"
+        android:text="@string/RESULTADO"
         android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="@dimen/text_size"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -29,9 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:hint="Novo Sorteio"
-            android:textColorHint="@android:color/white"
-            android:background="#696969"
+            android:hint="@string/BTN_NOVOSORTEIO"
+            android:textColorHint="@color/white"
+            android:background="@color/btn_background"
             android:onClick="novoSorteio"/>
     </RelativeLayout>
 

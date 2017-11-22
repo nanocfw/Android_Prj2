@@ -6,10 +6,10 @@
 
     <TextView
         android:id="@+id/tv"
-        android:textColor="#ff131313"
+        android:textColor="@color/itens_sorteio_text_color"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="10dp"
-        android:height="30dp"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:height="@dimen/itens_sorteio_text_margin_height"
         android:text="aslkjaskldasklmasdm"/>
 </LinearLayout>

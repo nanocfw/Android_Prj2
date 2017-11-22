@@ -9,21 +9,21 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Quantidade de Números a Sortear:"
+            android:layout_marginTop="@dimen/itens_sorteio_text_margin_top"
+            android:text="@string/OPCAO_SORTEIO_QTDE"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtQtdItens"
-            android:layout_width="50dp"
+            android:layout_width="@dimen/edt_width2"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/itens_sorteio_text_margin_top"
             android:hint="1"
             android:inputType="number" />
     </LinearLayout>
@@ -31,62 +31,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:layout_marginTop="@dimen/itens_sorteio_text_margin_left"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="Limites para Sorteio"
+            android:layout_marginRight="@dimen/itens_sorteio_btn_delete_margin_right"
+            android:text="@string/OPCAO_SORTEIO_LIMITE"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtminimo"
-            android:layout_width="70dp"
+            android:layout_width="@dimen/edt_width"
             android:layout_height="wrap_content"
-            android:hint="Mínimo"
+            android:hint="@string/OPCAO_SORTEIO_MIN"
             android:inputType="number"
-            android:textSize="14dp" />
+            android:textSize="@dimen/text_size2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/itens_sorteio_btn_delete_margin_right"
             android:text="à"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtmaximo"
-            android:layout_width="75dp"
+            android:layout_width="@dimen/edt_width"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:layout_marginLeft="5dp"
-            android:hint="Máximo"
+            android:layout_marginLeft="@dimen/itens_sorteio_btn_delete_margin_right"
+            android:hint="@string/OPCAO_SORTEIO_MAX"
             android:inputType="number"
-            android:textSize="14dp" />
+            android:textSize="@dimen/text_size2" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:layout_marginTop="@dimen/itens_sorteio_text_margin_top"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selecionar Critério:"
+            android:text="@string/OPCAO_SORTEIO_CRITERIO"
             android:textStyle="bold" />
     </LinearLayout>
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:layout_marginTop="@dimen/itens_sorteio_text_margin_top">
 
         <RadioGroup android:id="@+id/rgGrupo">
 
@@ -96,49 +96,49 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:tag="0"
-                android:text="Sortear Números Aleatórios" />
+                android:text="@string/RADIOBUTTON_ALEATORIO" />
 
             <RadioButton
                 android:id="@+id/rbSortearItemLista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="1"
-                android:text="Sortear Item da Lista" />
+                android:text="@string/RADIOBUTTON_ITEMLISTA" />
 
             <RadioButton
                 android:id="@+id/rbSortearCriterio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="2"
-                android:text="Sortear Critério Automaticamente" />
+                android:text="@string/RADIOBUTTON_SORTEIOCRITERIO" />
 
             <RadioButton
                 android:id="@+id/rbCrescente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="3"
-                android:text="Ordenar forma Crescente" />
+                android:text="@string/RADIOBUTTON_CRESCENTE" />
 
             <RadioButton
                 android:id="@+id/rbDecrescente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="4"
-                android:text="Ordenar forma Decrescente" />
+                android:text="@string/RADIOBUTTON_DECRESCENTE" />
 
             <RadioButton
                 android:id="@+id/rbPar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="5"
-                android:text="Listar Números Pares" />
+                android:text="@string/RADIOBUTTON_PARES" />
 
             <RadioButton
                 android:id="@+id/rbImpar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="6"
-                android:text="Listar Números Ímpares" />
+                android:text="@string/RADIOBUTTON_IMPARES" />
         </RadioGroup>
 
     </GridLayout>
@@ -152,9 +152,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="#696969"
-            android:hint="Sortear"
+            android:background="@color/btn_background"
+            android:hint="@string/BTN_SORTEAR"
             android:onClick="sortear"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@color/white" />
     </GridLayout>
 </LinearLayout>
