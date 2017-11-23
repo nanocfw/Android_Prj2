@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/HIST"
+        android:textSize="@dimen/text_size"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DATA_CRITERIO"
+        android:textSize="@dimen/text_size"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:layout_gravity="left"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:id="@+id/itensSorteio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
