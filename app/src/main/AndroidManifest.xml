@@ -21,7 +21,7 @@
         <activity android:name=".telas.OpcaoSorteioActivity" />
         <activity android:name=".telas.SorteioPersonalizadoActivity" />
         <activity android:name=".telas.ResultSorteioPersActivity" />
-        <activity android:name=".telas.Historico"/>
+        <activity android:name=".telas.HistoricoActivity"/>
     </application>
 
 </manifest>

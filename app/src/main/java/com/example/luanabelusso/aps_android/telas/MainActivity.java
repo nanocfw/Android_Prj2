@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.historico) {
-            Intent intent = new Intent(this, Historico.class);
+            Intent intent = new Intent(this, HistoricoActivity.class);
             startActivity(intent);
             return true;
         }
