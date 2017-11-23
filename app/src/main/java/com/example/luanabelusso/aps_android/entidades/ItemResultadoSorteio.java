@@ -18,6 +18,10 @@ public class ItemResultadoSorteio extends DefaultEntity {
     int sorteio;
     int resultado;// quando for item da lista, o resultado será o index, caso seja números, será o numero sorteado
 
+    public ItemResultadoSorteio() {
+        super();
+    }
+
     public ItemResultadoSorteio(int resultado) {
         this.resultado = resultado;
     }

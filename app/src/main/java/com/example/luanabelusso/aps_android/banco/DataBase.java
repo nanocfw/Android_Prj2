@@ -22,7 +22,6 @@ import com.example.luanabelusso.aps_android.entidades.Sorteio;
 public class DataBase extends SQLiteOpenHelper {
     private static final String NOME_BANCO = "sorteio.db";
     private static final int VERSAO = 1;
-    private static DataBase instance;
     private static List<DefaultEntity> listaTabelas;
 
     public DataBase() {
