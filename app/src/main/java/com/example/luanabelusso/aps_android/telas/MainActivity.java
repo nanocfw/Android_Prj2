@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.luanabelusso.aps_android.R;
-import com.example.luanabelusso.aps_android.banco.DataBase;
 import com.example.luanabelusso.aps_android.banco.controllers.ControllerSorteio;
+import com.example.luanabelusso.aps_android.entidades.ItemResultadoSorteio;
 import com.example.luanabelusso.aps_android.entidades.Sorteio;
+import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
+import com.example.luanabelusso.aps_android.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,12 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        android.app.ActionBar actionBar = getActionBar();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id==R.id.historico){
+        if (id == R.id.historico) {
             return true;
         }
 
@@ -41,44 +42,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sorteioSimples(View view) {
-        TextView txtresultado = (TextView) findViewById(R.id.edtresultado);
-        EditText edtmin = (EditText) findViewById(R.id.edtminimo);
-        EditText edtmax = (EditText) findViewById(R.id.edtmaximo);
+        TextView txtResultado = findViewById(R.id.edtresultado);
+        EditText edtMin = findViewById(R.id.edtminimo);
+        EditText edtMax = findViewById(R.id.edtmaximo);
 
-        int resultado = 0;
+        int min = Util.parseIntDef(edtMin.getText().toString(), 0);
+        int max = Util.parseIntDef(edtMax.getText().toString(), 0);
 
-        if (edtmin.getText().length() == 0 || edtmax.getText().length() == 0) {
-            resultado = sortAleatorio();
-        } else {
-            int minimo = Integer.parseInt(edtmin.getText().toString());
-            int maximo = Integer.parseInt(edtmax.getText().toString());
-
-            if (minimo > 0 && maximo > 0) {
-                resultado = (int) (minimo + (Math.random() * (maximo + 1 - minimo)));
-            } else {
-                resultado = sortAleatorio();
-            }
-        }
-        txtresultado.setText("" + resultado);
+        int resultado = Util.sorteio(min, max);
+        txtResultado.setText(String.valueOf(resultado));
+        Sorteio sorteio = new Sorteio();
+        sorteio.setQntResultados(1);
+        sorteio.setVlMinimo(min);
+        sorteio.setVlMaximo(max);
+        sorteio.setTipoCriterio(TipoCriterio.NUMEROS_ALEATORIOS);
+        sorteio.getItensResultado().add(new ItemResultadoSorteio(resultado));
+        ControllerSorteio.getInstance().salvarSorteio(sorteio);
     }
 
     public void sorteioPersonalizado(View view) {
         Sorteio sorteio = new Sorteio();
-        ControllerSorteio.getInstance().salvarSorteio(sorteio);
         ControllerSorteio.getInstance().setCurrentSorteio(sorteio);
         Intent intent = new Intent(this, OpcaoSorteioActivity.class);
-        Bundle params = new Bundle();
         startActivity(intent);
-    }
-
-    public int sortAleatorio() {
-        int i;
-        double d;
-
-        d = (Math.random() * 100);
-        d = Math.round(d);
-
-        i = (int) d;
-        return i;
     }
 }

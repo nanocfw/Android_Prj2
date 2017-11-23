@@ -12,8 +12,8 @@ public enum TipoCriterio {
         return asString(this);
     }
 
-    public static String asString(TipoCriterio d) {
-        switch (d) {
+    public static String asString(TipoCriterio c) {
+        switch (c) {
             case NUMEROS_ALEATORIOS:
                 return "Números Aleatórios";
             case ITEM_LISTA:
