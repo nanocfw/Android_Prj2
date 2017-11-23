@@ -28,4 +28,8 @@
     <string name="ADICIONAR">Adicionar</string>
     <string name="HIST">Histórico</string>
     <string name="DATA_CRITERIO">Data E Critério:</string>
+    <string name="VISUALIZAR">Visualizar Sorteio</string>
+    <string name="ITENS_ORG">Itens a Sortear</string>
+    <string name="ITENS_POS">Itens Sorteados</string>
+
 </resources>
