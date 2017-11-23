@@ -109,6 +109,7 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
         }
 
         ControllerSorteio.getInstance().salvarSorteio(sorteio);
+        alert("Sorteio foi salvo.");
         Intent intent = new Intent(this, ResultSorteioPersActivity.class);
         startActivity(intent);
 
@@ -120,7 +121,7 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
 
     public boolean onlyNumbersInItems() {
         for (ItemSorteio item : sorteio.getItensSorteio()) {
-            if (Util.isInteger(item.getDescricao()))
+            if (!Util.isInteger(item.getDescricao()))
                 return false;
         }
         return true;
@@ -131,11 +132,16 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
         TipoCriterio resultado;
 
         if (onlyNumbersInItems()) {
-            resultado = TipoCriterio.values()[(int) (1 + (Math.random() * (4)))];
+            resultado = TipoCriterio.values()[
+                    Util.sorteio(TipoCriterio.ORDEM_CRESCENTE.ordinal(), TipoCriterio.NUMEROS_IMPARES.ordinal())
+                    ];
         } else {
-            resultado = TipoCriterio.values()[(int) (3 + (Math.random() * (4)))];
+            resultado = TipoCriterio.values()[
+                    Util.sorteio(TipoCriterio.ORDEM_CRESCENTE.ordinal(), TipoCriterio.ORDEM_DECRESCENTE.ordinal())
+                    ];
         }
 
+        sorteio.setTipoCriterio(resultado);
         switch (resultado) {
             case ORDEM_CRESCENTE:
                 crescente();

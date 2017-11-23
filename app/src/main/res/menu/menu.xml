@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/historico"
-        android:icon="@drawable/ic_menu_black_18dp"
+        android:icon="@drawable/ic_menu_white_24dp"
         app:showAsAction="always"
         android:title="Histórico"/>
 

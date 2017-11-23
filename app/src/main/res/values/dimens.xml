@@ -4,7 +4,7 @@
     <dimen name="itens_sorteio_btn_editar_margin_right">50dp</dimen>
     <dimen name="itens_sorteio_text_margin_left">10dp</dimen>
     <dimen name="itens_sorteio_text_margin_left2">30dp</dimen>
-    <dimen name="itens_sorteio_text_margin_left3">100dp</dimen>
+    <dimen name="itens_sorteio_text_margin_left3">150dp</dimen>
     <dimen name="itens_sorteio_text_margin_right">90dp</dimen>
     <dimen name="itens_sorteio_text_margin_top">20dp</dimen>
     <dimen name="itens_sorteio_text_margin_top2">10dp</dimen>

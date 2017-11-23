@@ -13,7 +13,7 @@
             android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
             android:layout_marginRight="@dimen/itens_sorteio_text_margin_right"
             android:layout_marginStart="@dimen/itens_sorteio_text_margin_left"
-            android:text="Data"
+            android:text="00/00/0000 00:00:00"
             android:textColor="@color/itens_sorteio_text_color" />
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left3"
             android:layout_marginRight="@dimen/itens_sorteio_text_margin_right"
-            android:text="Critério"
+            android:text="Números aleatórios"
             android:textColor="@color/itens_sorteio_text_color" />
 
         <ImageButton
