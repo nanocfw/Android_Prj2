@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.historico) {
             return true;
 =======
+        if(id==R.id.historico){
+            Intent intent = new Intent(this,Historico.class);
+            startActivity(intent);
 >>>>>>> 762cfa9d4a0673b740020997015ce1593025f83e
         }
 
