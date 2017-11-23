@@ -10,6 +10,9 @@ import com.example.luanabelusso.aps_android.entidades.ItemSorteio;
 import com.example.luanabelusso.aps_android.entidades.Sorteio;
 import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Marciano on 19/11/2017.
  */
@@ -84,5 +87,27 @@ public class ControllerSorteio extends DataBase {
     public boolean deletarSorteio(int id) {
         String where = Sorteio.ID + " = " + id;
         return delete(Sorteio.TABELA, where) > 0;
+    }
+
+    public List<Sorteio> listarSorteios() {
+        List<Sorteio> aux = new ArrayList<>();
+
+        Cursor dados = selecionar(Sorteio.TABELA, "", new Sorteio().getAllFields());
+        if (dados == null || dados.getCount() == 0)
+            return aux;
+        while (dados.moveToNext()) {
+            Sorteio sorteio = new Sorteio();
+            sorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.ID)));
+            sorteio.setQntResultados(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.QNT_RESULTADOS)));
+            sorteio.setVlMinimo(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.VL_MINIMO)));
+            sorteio.setVlMaximo(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.VL_MAXIMO)));
+            sorteio.setTipoCriterio(TipoCriterio.values()[dados.getInt(dados.getColumnIndexOrThrow(Sorteio.TIPO_CRITERIO))]);
+            sorteio.setDataSorteio(Util.strToDateTime(dados.getString(dados.getColumnIndexOrThrow(Sorteio.DATA_SORTEIO))));
+
+            sorteio.setItensSorteio(ControllerItemSorteio.getInstance().getListaItens(sorteio.getId()));
+            sorteio.setItensResultado(ControllerItemResultadoSorteio.getInstance().getListaItensResultado(sorteio.getId()));
+            aux.add(sorteio);
+        }
+        return aux;
     }
 }

@@ -24,6 +24,7 @@ public class Sorteio extends DefaultEntity {
     public static final String VL_MINIMO = "vl_minimo";
     public static final String VL_MAXIMO = "vl_maximo";
     public static final String TIPO_CRITERIO = "tipo_criterio";
+    public static final String CRITERIO_ALEATORIO = "criterio_aleatorio";
     public static final String DATA_SORTEIO = "data_sorteio";
 
     int id;
@@ -31,6 +32,7 @@ public class Sorteio extends DefaultEntity {
     int vlMinimo;
     int vlMaximo;
     TipoCriterio tipoCriterio;
+    boolean criterioAleatorio;
     Date dataSorteio;
     List<ItemSorteio> itensSorteio;
     List<ItemResultadoSorteio> itensResultado;
@@ -51,6 +53,7 @@ public class Sorteio extends DefaultEntity {
                 VL_MINIMO + " integer, " +
                 VL_MAXIMO + " integer, " +
                 TIPO_CRITERIO + " smallint, " +
+                CRITERIO_ALEATORIO + " boolean, " +
                 DATA_SORTEIO + " datetime " +
                 ")";
     }
@@ -63,6 +66,7 @@ public class Sorteio extends DefaultEntity {
                 VL_MINIMO,
                 VL_MAXIMO,
                 TIPO_CRITERIO,
+                CRITERIO_ALEATORIO,
                 DATA_SORTEIO
         };
     }
@@ -74,17 +78,21 @@ public class Sorteio extends DefaultEntity {
         values.put(Sorteio.VL_MINIMO, this.vlMinimo);
         values.put(Sorteio.VL_MAXIMO, this.vlMaximo);
         values.put(Sorteio.TIPO_CRITERIO, this.tipoCriterio.ordinal());
+        values.put(Sorteio.CRITERIO_ALEATORIO, this.criterioAleatorio);
         values.put(Sorteio.DATA_SORTEIO, Util.dateTimeToStrSql(this.dataSorteio));
         return values;
     }
 
     public ArrayList<String> getStringItensResultado() {
         ArrayList<String> aux = new ArrayList<>();
-        for (int i = 0; i < itensResultado.size(); i++)
+        int r;
+        for (int i = 0; i < itensResultado.size(); i++) {
+            r = itensResultado.get(i).getResultado();
             if (tipoCriterio == TipoCriterio.NUMEROS_ALEATORIOS)
-                aux.add(String.valueOf(itensResultado.get(i).getResultado()));
+                aux.add(String.valueOf(r));
             else
-                aux.add(itensSorteio.get(itensResultado.get(i).getResultado()).getDescricao());
+                aux.add(itensSorteio.get(r).getDescricao());
+        }
         return aux;
     }
 }

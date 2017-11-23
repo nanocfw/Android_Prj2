@@ -9,11 +9,10 @@
         android:layout_height="@dimen/layout_height">
 
         <ImageView
-            android:src="@drawable/logo_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/itens_sorteio_text_margin_topCustom2"
-            />
+            android:src="@drawable/logo_app" />
     </LinearLayout>
 
     <GridLayout
@@ -24,21 +23,21 @@
         <EditText
             android:id="@+id/edtminimo"
             android:layout_width="@dimen/custom_height"
-            android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left2"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left2"
             android:ems="10"
-            android:inputType="number"
-            android:hint="@string/LIMITE_MIN"/>
+            android:hint="@string/LIMITE_MIN"
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/edtmaximo"
             android:layout_width="@dimen/custom_height"
-            android:layout_marginRight="@dimen/itens_sorteio_btn_editar_margin_right"
-            android:layout_gravity="right"
             android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/itens_sorteio_btn_editar_margin_right"
             android:ems="10"
-            android:inputType="number"
-            android:hint="@string/LIMITE_MAX"/>
+            android:hint="@string/LIMITE_MAX"
+            android:inputType="number" />
     </GridLayout>
 
     <GridLayout
@@ -48,31 +47,31 @@
         android:layout_marginTop="@dimen/itens_sorteio_text_margin_left">
 
         <Button
-            android:id="@+id/btnsortear"
-            android:layout_gravity="center"
+            android:id="@+id/btnSorteioRapido"
             android:layout_width="@dimen/layout_height"
             android:layout_height="wrap_content"
-            android:hint="@string/SORTEAR"
-            android:onClick="sorteioSimples"
+            android:layout_gravity="center"
             android:background="@color/btn_background"
-            android:textColorHint="@color/white"/>
+            android:hint="@string/SORTEAR"
+            android:onClick="onBtnSorteioRapidoClick"
+            android:textColorHint="@color/white" />
     </GridLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/itens_sorteio_text_margin_top2">
+        android:layout_marginTop="@dimen/itens_sorteio_text_margin_top2"
+        android:gravity="center">
 
         <EditText
             android:id="@+id/edtresultado"
-            android:layout_gravity="center|top"
-            android:layout_height="wrap_content"
             android:layout_width="@dimen/custom_height"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:enabled="false"
             android:hint="@string/RESULTADO"
-            android:enabled="false"/>
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <RelativeLayout
@@ -81,7 +80,7 @@
         android:layout_gravity="bottom">
 
         <Button
-            android:id="@+id/btnsorteioPersonalizado"
+            android:id="@+id/btnNovoSorteioPersonalizado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -89,7 +88,7 @@
             android:layout_alignParentStart="true"
             android:background="@color/btn_background"
             android:hint="@string/PERSONALIZAR"
-            android:onClick="sorteioPersonalizado"
+            android:onClick="onBtnNovoSorteioPersonalizadoClick"
             android:textColorHint="@color/white" />
     </RelativeLayout>
 </LinearLayout>

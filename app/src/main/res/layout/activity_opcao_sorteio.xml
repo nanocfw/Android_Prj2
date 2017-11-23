@@ -148,13 +148,13 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btnsorteio"
+            android:id="@+id/btnSortear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/btn_background"
             android:hint="@string/BTN_SORTEAR"
-            android:onClick="sortear"
+            android:onClick="onBtnSortearClick"
             android:textColorHint="@color/white" />
     </GridLayout>
 </LinearLayout>

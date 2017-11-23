@@ -68,7 +68,6 @@ public class AdapterItensSorteioPersonalizado extends ArrayAdapter<ItemSorteio> 
                                 public void onClick(DialogInterface dialog, int which) {
                                     String descricao = input.getText().toString();
                                     itemSorteio.setDescricao(descricao);
-                                    ControllerItemSorteio.getInstance().salvarItem(itemSorteio);
                                     notifyDataSetChanged();
                                 }
                             })
@@ -90,7 +89,6 @@ public class AdapterItensSorteioPersonalizado extends ArrayAdapter<ItemSorteio> 
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(R.string.STR_SIM, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    ControllerItemSorteio.getInstance().deletarItemSorteio(itemSorteio.getId());
                                     remove(itemSorteio);
                                 }
                             })

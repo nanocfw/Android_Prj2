@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.luanabelusso.aps_android.R;
 
-public class VisualizarActivity extends DefaultActivity{
+public class VisualizarSorteioActivity extends DefaultActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visualizar);
+        setContentView(R.layout.activity_visualizar_sorteio);
     }
 }

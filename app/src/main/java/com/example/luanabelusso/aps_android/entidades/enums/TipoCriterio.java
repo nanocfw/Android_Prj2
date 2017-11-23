@@ -5,7 +5,7 @@ package com.example.luanabelusso.aps_android.entidades.enums;
  */
 
 public enum TipoCriterio {
-    NUMEROS_ALEATORIOS, ITEM_LISTA, AUTOMATICO, ORDEM_CRESCENTE, ORDEM_DECRESCENTE, NUMEROS_PARES, NUMEROS_IMPARES;
+    NUMEROS_ALEATORIOS, ITEM_LISTA, CRITERIO_AUTOMATICO, ORDEM_CRESCENTE, ORDEM_DECRESCENTE, NUMEROS_PARES, NUMEROS_IMPARES;
 
     @Override
     public String toString() {
@@ -18,7 +18,7 @@ public enum TipoCriterio {
                 return "Números Aleatórios";
             case ITEM_LISTA:
                 return "Item da Lista";
-            case AUTOMATICO:
+            case CRITERIO_AUTOMATICO:
                 return "Automático";
             case ORDEM_CRESCENTE:
                 return "Ordem Crescente";

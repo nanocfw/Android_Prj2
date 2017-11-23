@@ -33,7 +33,7 @@ public class OpcaoSorteioActivity extends DefaultActivity {
         setContentView(R.layout.activity_opcao_sorteio);
 
         rgOpcoes = findViewById(R.id.rgGrupo);
-        btnAcao = findViewById(R.id.btnsorteio);
+        btnAcao = findViewById(R.id.btnSortear);
 
         // Alterar descrição do botão conforme item selecionado
         rgOpcoes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -51,7 +51,7 @@ public class OpcaoSorteioActivity extends DefaultActivity {
         });
     }
 
-    public void sortear(View view) {
+    public void onBtnSortearClick(View view) {
         EditText edtQtdItens = findViewById(R.id.edtQtdItens);
         EditText edtLimMin = findViewById(R.id.edtminimo);
         EditText edtLimMax = findViewById(R.id.edtmaximo);
@@ -61,7 +61,10 @@ public class OpcaoSorteioActivity extends DefaultActivity {
         sorteio.setTipoCriterio(TipoCriterio.values()[Integer.parseInt((String) rbSelecionado.getTag())]);
         sorteio.setVlMinimo(Util.parseIntDef(edtLimMin.getText().toString(), 0));
         sorteio.setVlMaximo(Util.parseIntDef(edtLimMax.getText().toString(), 0));
-        sorteio.setQntResultados(Util.parseIntDef(edtQtdItens.getText().toString(), 0));
+        sorteio.setQntResultados(Util.parseIntDef(edtQtdItens.getText().toString(), 1));
+
+        if (sorteio.getQntResultados() < 1)
+            sorteio.setQntResultados(1);
 
         if (sorteio.getTipoCriterio() == TipoCriterio.NUMEROS_ALEATORIOS) {
             List<Integer> aux = Util.sorteio(sorteio.getVlMinimo(), sorteio.getVlMaximo(), sorteio.getQntResultados());
@@ -70,6 +73,7 @@ public class OpcaoSorteioActivity extends DefaultActivity {
                 sorteio.getItensResultado().add(new ItemResultadoSorteio(resultado));
 
             ControllerSorteio.getInstance().salvarSorteio(sorteio);
+            alert("Sorteio foi salvo.");
 
             Intent intent = new Intent(this, ResultSorteioPersActivity.class);
             startActivity(intent);
@@ -83,7 +87,7 @@ public class OpcaoSorteioActivity extends DefaultActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && data != null && data.getIntExtra("resultado", 0) == 1)
+        if (requestCode == 1 && data != null && data.getIntExtra("retorno", 0) == 1)
             finish();
     }
 }

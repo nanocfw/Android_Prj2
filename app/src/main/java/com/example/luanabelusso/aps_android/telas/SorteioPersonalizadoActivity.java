@@ -7,22 +7,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.luanabelusso.aps_android.R;
-import com.example.luanabelusso.aps_android.banco.controllers.ControllerItemSorteio;
 import com.example.luanabelusso.aps_android.banco.controllers.ControllerSorteio;
+import com.example.luanabelusso.aps_android.entidades.ItemResultadoSorteio;
 import com.example.luanabelusso.aps_android.entidades.ItemSorteio;
+import com.example.luanabelusso.aps_android.entidades.Sorteio;
+import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
 import com.example.luanabelusso.aps_android.telas.adapters.AdapterItensSorteioPersonalizado;
+import com.example.luanabelusso.aps_android.util.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by Luana Belusso on 08/10/2017.
@@ -31,22 +33,21 @@ import java.util.Collections;
 public class SorteioPersonalizadoActivity extends DefaultActivity {
 
     private AdapterItensSorteioPersonalizado adapter;
-    private ListView list;
-    private String descricaoSorteio;
+    private Sorteio sorteio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorteio_personalizado);
+        sorteio = ControllerSorteio.getInstance().getCurrentSorteio();
 
-        list = findViewById(R.id.lvItens);
-        adapter = new AdapterItensSorteioPersonalizado(this,
-                ControllerSorteio.getInstance().getCurrentSorteio().getItensSorteio());
+        ListView list = findViewById(R.id.lvItens);
+        adapter = new AdapterItensSorteioPersonalizado(this, sorteio.getItensSorteio());
 
         list.setAdapter(adapter);
 
         TextView tipoSorteio = findViewById(R.id.tvTipoSorteio);
-        tipoSorteio.setText(ControllerSorteio.getInstance().getCurrentSorteio().getTipoCriterio().toString());
+        tipoSorteio.setText(sorteio.getTipoCriterio().toString());
     }
 
     public void onBtnAdicionarClick(View v) {
@@ -75,175 +76,127 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
                 }).show();
     }
 
-    public void sortear(View v) {
-//        ArrayList<String> list, listOrdenada;
-//        list = arraylist;
-//        listOrdenada = list;
-//
-//        switch (tipoSorteio) {
-//            case 1:
-//                listOrdenada = sortearCriterio(v, list);
-//                break;
-//            case 2:
-//                listOrdenada = crescente(v, list);
-//                break;
-//            case 3:
-//                listOrdenada = decrescente(v, list);
-//                break;
-//            case 4:
-//                listOrdenada = par(v, list);
-//                break;
-//            case 5:
-//                listOrdenada = impar(v, list);
-//                break;
-//            case 7:
-//                listOrdenada = sortearItemLista(v, list);
-//                break;
-//    }
+    public void onBtnSorteioPersonalizadoClick(View v) {
+        if (sorteio.getItensSorteio().size() < 2) {
+            alert("Lista deve possuir mais do que um item.");
+            return;
+        }
 
-//        Intent intent = new Intent(this, ResultSorteioPersActivity.class);
-//        Bundle params = new Bundle();
-//        params.putStringArrayList("dados", listOrdenada);
-//        params.putString("tipoSorteio", descricaoSorteio);
-//        intent.putExtras(params);
-//
-//        startActivity(intent);
+        if (sorteio.getTipoCriterio() == TipoCriterio.ITEM_LISTA && sorteio.getItensSorteio().size() < sorteio.getQntResultados()) {
+            alert("Não há itens suficientes para sortear.");
+            return;
+        }
+
+        switch (sorteio.getTipoCriterio()) {
+            case ITEM_LISTA:
+                sortearItemLista();
+                break;
+            case CRITERIO_AUTOMATICO:
+                sortearCriterio();
+                break;
+            case ORDEM_CRESCENTE:
+                crescente();
+                break;
+            case ORDEM_DECRESCENTE:
+                decrescente();
+                break;
+            case NUMEROS_PARES:
+                par();
+                break;
+            case NUMEROS_IMPARES:
+                impar();
+                break;
+        }
+
+        ControllerSorteio.getInstance().salvarSorteio(sorteio);
+        Intent intent = new Intent(this, ResultSorteioPersActivity.class);
+        startActivity(intent);
+
         Intent returnIntent = new Intent();
         returnIntent.putExtra("retorno", 1);
         setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 
-    public ArrayList<String> sortearCriterio(View v, ArrayList<String> list) {
-        int resultado;
+    public boolean onlyNumbersInItems() {
+        for (ItemSorteio item : sorteio.getItensSorteio()) {
+            if (Util.isInteger(item.getDescricao()))
+                return false;
+        }
+        return true;
+    }
 
-        if (validaIsNumber(v, list)) {
-            resultado = (int) (1 + (Math.random() * (4)));
+    public void sortearCriterio() {
+        sorteio.setCriterioAleatorio(true);
+        TipoCriterio resultado;
+
+        if (onlyNumbersInItems()) {
+            resultado = TipoCriterio.values()[(int) (1 + (Math.random() * (4)))];
         } else {
-            resultado = (int) (3 + (Math.random() * (4)));
+            resultado = TipoCriterio.values()[(int) (3 + (Math.random() * (4)))];
         }
 
         switch (resultado) {
-            case 1:
-                descricaoSorteio = "Sortear Números Pares";
-                list = par(v, list);
+            case ORDEM_CRESCENTE:
+                crescente();
                 break;
-            case 2:
-                descricaoSorteio = "Sortear Númeors Ímpares";
-                list = impar(v, list);
+            case ORDEM_DECRESCENTE:
+                decrescente();
                 break;
-            case 3:
-                descricaoSorteio = "Ordenar forma Crescente";
-                list = crescente(v, list);
+            case NUMEROS_PARES:
+                par();
+                break;
+            case NUMEROS_IMPARES:
+                impar();
                 break;
             default:
-                descricaoSorteio = "Ordenar forma Decrescente";
-                list = decrescente(v, list);
-                break;
+                alert("Erro");
         }
-        return list;
     }
 
-    public ArrayList<String> crescente(View v, ArrayList<String> list) {
-
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        ArrayList<String> listaFinal = new ArrayList<String>();
-
-        String[] stockArr = new String[list.size()];
-        stockArr = list.toArray(stockArr);
-
-        Arrays.sort(stockArr);
-
-        for (int i = 0; i < stockArr.length; i++) {
-            listaFinal.add(stockArr[i]);
-        }
-
-        return listaFinal;
-    }
-
-    public ArrayList<String> decrescente(View v, ArrayList<String> list) {
-        Collections.sort(list, Collections.reverseOrder());
-
-        return list;
-    }
-
-    public ArrayList<String> par(View v, ArrayList<String> list) {
-
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        ArrayList<Integer> resultPar = new ArrayList<Integer>();
-        ArrayList<String> listaFinal = new ArrayList<String>();
-
-        for (int i = 0; i < list.size(); i++) {
-            result.add(Integer.parseInt(list.get(i)));
-        }
-
-        for (int n = 0; n < result.size(); n++) {
-
-            if (result.get(n) % 2 == 0) {
-                resultPar.add(result.get(n));
+    public void crescente() {
+        List<ItemSorteio> aux = new ArrayList<>();
+        aux.addAll(sorteio.getItensSorteio());
+        Collections.sort(aux, new Comparator<ItemSorteio>() {
+            @Override
+            public int compare(ItemSorteio o1, ItemSorteio o2) {
+                return o1.getDescricao().compareTo(o2.getDescricao());
             }
-        }
+        });
 
-        for (int i = 0; i < resultPar.size(); i++) {
-            listaFinal.add(resultPar.get(i).toString());
-        }
-
-        return listaFinal;
-
+        for (int i = 0; i < aux.size(); i++)
+            sorteio.getItensResultado().add(new ItemResultadoSorteio(sorteio.getItensSorteio().indexOf(aux.get(i))));
     }
 
-    public ArrayList<String> impar(View v, ArrayList<String> list) {
-
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        ArrayList<Integer> resultImpar = new ArrayList<Integer>();
-        ArrayList<String> listaFinal = new ArrayList<String>();
-
-        for (int i = 0; i < list.size(); i++) {
-            result.add(Integer.parseInt(list.get(i)));
-        }
-
-        for (int n = 0; n < result.size(); n++) {
-
-            if (result.get(n) % 2 != 0) {
-                resultImpar.add(result.get(n));
+    public void decrescente() {
+        List<ItemSorteio> aux = new ArrayList<>();
+        aux.addAll(sorteio.getItensSorteio());
+        Collections.sort(aux, new Comparator<ItemSorteio>() {
+            @Override
+            public int compare(ItemSorteio o1, ItemSorteio o2) {
+                return o2.getDescricao().compareTo(o1.getDescricao());
             }
-        }
+        });
 
-        for (int i = 0; i < resultImpar.size(); i++) {
-            listaFinal.add(resultImpar.get(i).toString());
-        }
-
-        return listaFinal;
-
+        for (int i = 0; i < aux.size(); i++)
+            sorteio.getItensResultado().add(new ItemResultadoSorteio(sorteio.getItensSorteio().indexOf(aux.get(i))));
     }
 
-//    public ArrayList<String> sortearItemLista(View v, ArrayList<String> list) {
-//        ArrayList<String> listaFinal = new ArrayList<String>();
-//        int tam = list.size();
-//
-//        for (int n = 0; n < qtdItens; n++) {
-//            int i = (int) (0 + (Math.random() * (tam)));
-//
-//            while (listaFinal.contains(list.get(i).toString())) {
-//                i = (int) (0 + (Math.random() * (tam)));
-//            }
-//
-//            listaFinal.add(list.get(i).toString());
-//        }
-//
-//        return listaFinal;
-//    }
+    public void par() {
+        for (int i = 0; i < sorteio.getItensSorteio().size(); i++)
+            if (Util.parseIntDef(sorteio.getItensSorteio().get(i).getDescricao(), 0) % 2 == 0)
+                sorteio.getItensResultado().add(new ItemResultadoSorteio(i));
+    }
 
-    public boolean validaIsNumber(View v, ArrayList<String> list) {
-        int number;
+    public void impar() {
+        for (int i = 0; i < sorteio.getItensSorteio().size(); i++)
+            if (Util.parseIntDef(sorteio.getItensSorteio().get(i).getDescricao(), 0) % 2 != 0)
+                sorteio.getItensResultado().add(new ItemResultadoSorteio(i));
+    }
 
-        try {
-            for (int i = 0; i < list.size(); i++) {
-                number = Integer.parseInt(list.get(i));
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-
+    public void sortearItemLista() {
+        List<Integer> aux = Util.sorteio(0, sorteio.getItensSorteio().size() - 1, sorteio.getQntResultados());
+        for (Integer resultado : aux)
+            sorteio.getItensResultado().add(new ItemResultadoSorteio(resultado));
     }
 }

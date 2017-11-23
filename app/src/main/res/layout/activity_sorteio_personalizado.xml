@@ -33,13 +33,13 @@
         android:layout_gravity="bottom">
 
         <Button
-            android:id="@+id/btnsortear"
+            android:id="@+id/btnSorteioPersonalizador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/btn_background"
             android:hint="@string/BTN_SORTEAR"
-            android:onClick="sortear"
+            android:onClick="onBtnSorteioPersonalizadoClick"
             android:textColorHint="@color/white" />
     </RelativeLayout>
 

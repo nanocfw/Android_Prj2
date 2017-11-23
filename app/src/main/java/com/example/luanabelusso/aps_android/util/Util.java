@@ -16,6 +16,11 @@ public class Util {
         return dateFormat.format(date);
     }
 
+    public static String dateTimeToStr(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(date);
+    }
+
     public static Date strToDateTime(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -55,6 +60,10 @@ public class Util {
     }
 
     public static int parseIntDef(String s, int defaultValue) {
-        return s.matches("-?\\d+") ? Integer.parseInt(s) : defaultValue;
+        return isInteger(s) ? Integer.parseInt(s) : defaultValue;
+    }
+
+    public static boolean isInteger(String s) {
+        return s.matches("-?\\d+");
     }
 }

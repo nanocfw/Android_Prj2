@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void sorteioSimples(View view) {
+    public void onBtnSorteioRapidoClick(View view) {
         TextView txtResultado = findViewById(R.id.edtresultado);
         EditText edtMin = findViewById(R.id.edtminimo);
         EditText edtMax = findViewById(R.id.edtmaximo);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ControllerSorteio.getInstance().salvarSorteio(sorteio);
     }
 
-    public void sorteioPersonalizado(View view) {
+    public void onBtnNovoSorteioPersonalizadoClick(View view) {
         Sorteio sorteio = new Sorteio();
         ControllerSorteio.getInstance().setCurrentSorteio(sorteio);
         Intent intent = new Intent(this, OpcaoSorteioActivity.class);
