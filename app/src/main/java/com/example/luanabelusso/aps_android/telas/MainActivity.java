@@ -34,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+<<<<<<< HEAD
         if (id == R.id.historico) {
             return true;
+=======
+>>>>>>> 762cfa9d4a0673b740020997015ce1593025f83e
         }
 
         return super.onOptionsItemSelected(item);
