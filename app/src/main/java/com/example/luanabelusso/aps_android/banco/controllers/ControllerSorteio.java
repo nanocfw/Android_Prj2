@@ -70,7 +70,6 @@ public class ControllerSorteio extends DataBase {
 
         Sorteio aux = new Sorteio();
         aux.setId(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.ID)));
-        aux.setDescricao(dados.getString(dados.getColumnIndexOrThrow(Sorteio.DESCRICAO)));
         aux.setQntResultados(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.QNT_RESULTADOS)));
         aux.setVlMinimo(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.VL_MINIMO)));
         aux.setVlMaximo(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.VL_MAXIMO)));

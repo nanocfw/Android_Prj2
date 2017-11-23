@@ -10,7 +10,10 @@ import android.widget.RadioGroup;
 import android.graphics.Color;
 
 import com.example.luanabelusso.aps_android.R;
+import com.example.luanabelusso.aps_android.banco.controllers.ControllerSorteio;
+import com.example.luanabelusso.aps_android.entidades.Sorteio;
 import com.example.luanabelusso.aps_android.entidades.enums.TipoCriterio;
+import com.example.luanabelusso.aps_android.util.Util;
 
 /**
  * Created by Luana Belusso on 08/10/2017.
@@ -46,30 +49,19 @@ public class OpcaoSorteioActivity extends DefaultActivity {
     }
 
     public void sortear(View view) {
-        EditText edtQtdItens = (EditText) findViewById(R.id.edtQtdItens);
-        EditText edtLimMin = (EditText) findViewById(R.id.edtminimo);
-        EditText edtLimMax = (EditText) findViewById(R.id.edtmaximo);
+        EditText edtQtdItens = findViewById(R.id.edtQtdItens);
+        EditText edtLimMin = findViewById(R.id.edtminimo);
+        EditText edtLimMax = findViewById(R.id.edtmaximo);
         RadioButton rbSelecionado = findViewById(rgOpcoes.getCheckedRadioButtonId());
 
+        Sorteio sorteio = ControllerSorteio.getInstance().getCurrentSorteio();
+        sorteio.setTipoCriterio(TipoCriterio.values()[Integer.parseInt((String) rbSelecionado.getTag())]);
+        sorteio.setVlMinimo(Util.parseIntDef(edtLimMin.getText().toString(), 0));
+        sorteio.setVlMaximo(Util.parseIntDef(edtLimMax.getText().toString(), 0));
+        sorteio.setQntResultados(Util.parseIntDef(edtQtdItens.getText().toString(), 0));
+
+
         Intent intent = new Intent(this, SorteioPersonalizadoActivity.class);
-        Bundle params = new Bundle();
-        params.putInt("tipoSorteio", Integer.parseInt((String) rbSelecionado.getTag()));
-
-        if (edtQtdItens.getText().length() == 0) {
-            params.putInt("qtdItens", 1);
-        } else if (Integer.parseInt(edtQtdItens.getText().toString()) > 0) {
-            params.putInt("qtdItens", Integer.parseInt(edtQtdItens.getText().toString()));
-        }
-
-        if (edtLimMin.getText().length() == 0 || edtLimMin.getText().length() == 0) {
-            params.putInt("limMin", 0);
-            params.putInt("limMax", 0);
-        } else if (Integer.parseInt(edtLimMin.getText().toString()) > 0 && Integer.parseInt(edtLimMax.getText().toString()) > 0) {
-            params.putInt("limMin", Integer.parseInt(edtLimMin.getText().toString()));
-            params.putInt("limMax", Integer.parseInt(edtLimMax.getText().toString()));
-        }
-
-        intent.putExtras(params);
         startActivity(intent);
     }
 }

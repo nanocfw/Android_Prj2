@@ -20,7 +20,6 @@ import lombok.Data;
 public class Sorteio extends DefaultEntity {
     public static final String TABELA = "SORTEIO";
     public static final String ID = "_id";
-    public static final String DESCRICAO = "descricao";
     public static final String QNT_RESULTADOS = "qnt_resultados";
     public static final String VL_MINIMO = "vl_minimo";
     public static final String VL_MAXIMO = "vl_maximo";
@@ -28,7 +27,6 @@ public class Sorteio extends DefaultEntity {
     public static final String DATA_SORTEIO = "data_sorteio";
 
     int id;
-    String descricao;
     int qntResultados;
     int vlMinimo;
     int vlMaximo;
@@ -49,7 +47,6 @@ public class Sorteio extends DefaultEntity {
     public String getScriptCreate() {
         return "CREATE TABLE " + TABELA + "(" +
                 ID + " integer primary key autoincrement, " +
-                DESCRICAO + " text, " +
                 QNT_RESULTADOS + " integer, " +
                 VL_MINIMO + " integer, " +
                 VL_MAXIMO + " integer, " +
@@ -62,7 +59,6 @@ public class Sorteio extends DefaultEntity {
     public String[] getAllFields() {
         return new String[]{
                 ID,
-                DESCRICAO,
                 QNT_RESULTADOS,
                 VL_MINIMO,
                 VL_MAXIMO,
@@ -74,7 +70,6 @@ public class Sorteio extends DefaultEntity {
     @Override
     public ContentValues getUpdateValues() {
         ContentValues values = new ContentValues();
-        values.put(Sorteio.DESCRICAO, this.descricao);
         values.put(Sorteio.QNT_RESULTADOS, this.qntResultados);
         values.put(Sorteio.VL_MINIMO, this.vlMinimo);
         values.put(Sorteio.VL_MAXIMO, this.vlMaximo);
