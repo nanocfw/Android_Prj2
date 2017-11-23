@@ -1,5 +1,6 @@
 package com.example.luanabelusso.aps_android.telas;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,34 +32,21 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
 
     private AdapterItensSorteioPersonalizado adapter;
     private ListView list;
-    private int tipoSorteio;
     private String descricaoSorteio;
-    private int qtdItens;
-    private int limMin;
-    private int limMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorteio_personalizado);
 
-        final Bundle args = getIntent().getExtras();
-        tipoSorteio = args.getInt("tipoSorteio");
-        qtdItens = args.getInt("qtdItens");
-        limMin = args.getInt("limMin");
-        limMax = args.getInt("limMax");
-
-        list = (ListView) findViewById(R.id.lvItens);
+        list = findViewById(R.id.lvItens);
         adapter = new AdapterItensSorteioPersonalizado(this,
                 ControllerSorteio.getInstance().getCurrentSorteio().getItensSorteio());
 
         list.setAdapter(adapter);
 
-        setTipoSorteio();
-
-        if (tipoSorteio == 6) {
-            aleatorios();
-        }
+        TextView tipoSorteio = findViewById(R.id.tvTipoSorteio);
+        tipoSorteio.setText(ControllerSorteio.getInstance().getCurrentSorteio().getTipoCriterio().toString());
     }
 
     public void onBtnAdicionarClick(View v) {
@@ -76,7 +64,6 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
                         ControllerSorteio.getInstance().getCurrentSorteio().getItensSorteio().add(itemSorteio);
                         itemSorteio.setSorteio(ControllerSorteio.getInstance().getCurrentSorteio().getId());
                         itemSorteio.setDescricao(descricao);
-                        ControllerItemSorteio.getInstance().salvarItem(itemSorteio);
                         adapter.notifyDataSetChanged();
                     }
                 })
@@ -86,32 +73,6 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
                         dialog.cancel();
                     }
                 }).show();
-    }
-
-    public void setTipoSorteio() {
-        TextView tv = (TextView) findViewById(R.id.tvTipoSorteio);
-
-        switch (tipoSorteio) {
-            case 1:
-                descricaoSorteio = "Sortear Critério Automaticamente";
-                break;
-            case 2:
-                descricaoSorteio = "Ordenar forma Crescente";
-                break;
-            case 3:
-                descricaoSorteio = "Ordenar forma Decrescente";
-                break;
-            case 4:
-                descricaoSorteio = "Sortear Números Pares";
-                break;
-            case 5:
-                descricaoSorteio = "Sortear Números Ímpares";
-                break;
-            case 7:
-                descricaoSorteio = "Sortear Item de uma Lista";
-                break;
-        }
-        tv.setText(descricaoSorteio);
     }
 
     public void sortear(View v) {
@@ -147,7 +108,9 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
 //        intent.putExtras(params);
 //
 //        startActivity(intent);
-
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("retorno", 1);
+        setResult(Activity.RESULT_OK, returnIntent);
     }
 
     public ArrayList<String> sortearCriterio(View v, ArrayList<String> list) {
@@ -253,55 +216,22 @@ public class SorteioPersonalizadoActivity extends DefaultActivity {
 
     }
 
-    public void aleatorios() {
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        ArrayList<String> listaFinal = new ArrayList<String>();
-
-        if (limMax > 0 && limMin > 0) {
-            for (int n = 0; n < qtdItens; n++) {
-                result.add((int) (limMin + (Math.random() * (limMax + 1 - limMin))));
-            }
-        } else {
-            int i;
-            double d;
-
-            for (int n = 0; n < qtdItens; n++) {
-                d = (Math.random() * 100);
-                d = Math.round(d);
-
-                i = (int) d;
-                result.add(i);
-            }
-        }
-
-        for (int i = 0; i < result.size(); i++) {
-            listaFinal.add(result.get(i).toString());
-        }
-
-        Intent intent = new Intent(this, ResultSorteioPersActivity.class);
-        Bundle params = new Bundle();
-        params.putStringArrayList("dados", listaFinal);
-        params.putString("tipoSorteio", descricaoSorteio);
-        intent.putExtras(params);
-        startActivity(intent);
-    }
-
-    public ArrayList<String> sortearItemLista(View v, ArrayList<String> list) {
-        ArrayList<String> listaFinal = new ArrayList<String>();
-        int tam = list.size();
-
-        for (int n = 0; n < qtdItens; n++) {
-            int i = (int) (0 + (Math.random() * (tam)));
-
-            while (listaFinal.contains(list.get(i).toString())) {
-                i = (int) (0 + (Math.random() * (tam)));
-            }
-
-            listaFinal.add(list.get(i).toString());
-        }
-
-        return listaFinal;
-    }
+//    public ArrayList<String> sortearItemLista(View v, ArrayList<String> list) {
+//        ArrayList<String> listaFinal = new ArrayList<String>();
+//        int tam = list.size();
+//
+//        for (int n = 0; n < qtdItens; n++) {
+//            int i = (int) (0 + (Math.random() * (tam)));
+//
+//            while (listaFinal.contains(list.get(i).toString())) {
+//                i = (int) (0 + (Math.random() * (tam)));
+//            }
+//
+//            listaFinal.add(list.get(i).toString());
+//        }
+//
+//        return listaFinal;
+//    }
 
     public boolean validaIsNumber(View v, ArrayList<String> list) {
         int number;

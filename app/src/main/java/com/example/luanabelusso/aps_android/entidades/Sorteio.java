@@ -77,4 +77,14 @@ public class Sorteio extends DefaultEntity {
         values.put(Sorteio.DATA_SORTEIO, Util.dateTimeToStrSql(this.dataSorteio));
         return values;
     }
+
+    public ArrayList<String> getStringItensResultado() {
+        ArrayList<String> aux = new ArrayList<>();
+        for (int i = 0; i < itensResultado.size(); i++)
+            if (tipoCriterio == TipoCriterio.NUMEROS_ALEATORIOS)
+                aux.add(String.valueOf(itensResultado.get(i).getResultado()));
+            else
+                aux.add(itensSorteio.get(itensResultado.get(i).getResultado()).getDescricao());
+        return aux;
+    }
 }

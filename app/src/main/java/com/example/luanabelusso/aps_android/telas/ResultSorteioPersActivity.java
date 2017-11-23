@@ -1,5 +1,6 @@
 package com.example.luanabelusso.aps_android.telas;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,13 +9,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.luanabelusso.aps_android.R;
+import com.example.luanabelusso.aps_android.banco.controllers.ControllerSorteio;
 
 import java.util.ArrayList;
 
-public class ResultSorteioPersActivity  extends DefaultActivity {
+public class ResultSorteioPersActivity extends DefaultActivity {
 
     private ArrayList<String> dados;
-    private String descricaoSorteio;
     private ListView list;
     private ArrayAdapter<String> adapter;
 
@@ -23,23 +24,18 @@ public class ResultSorteioPersActivity  extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_sorteio_pers);
 
-        Bundle args = getIntent().getExtras();
-        dados = args.getStringArrayList("dados");
-        descricaoSorteio = args.getString("tipoSorteio");
+        dados = ControllerSorteio.getInstance().getCurrentSorteio().getStringItensResultado();
 
-        list = (ListView) findViewById(R.id.listView2);
-
-        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_adapter_result_pers,R.id.tv, dados);
+        list = findViewById(R.id.lvItensResultado);
+        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.activity_adapter_result_pers, R.id.tv, dados);
         list.setAdapter(adapter);
 
-        TextView tvResult = (TextView) findViewById(R.id.tvResultado);
-        tvResult.setText(descricaoSorteio);
+        TextView tvResult = findViewById(R.id.tvResultado);
+        tvResult.setText(getString(R.string.RESULTADO) + " " +
+                ControllerSorteio.getInstance().getCurrentSorteio().getTipoCriterio().toString());
     }
 
-    public void novoSorteio(View v){
-        adapter.clear();
-
-        Intent intent = new Intent(this, OpcaoSorteioActivity.class);
-        startActivity(intent);
+    public void novoSorteio(View v) {
+        finish();
     }
 }
