@@ -1,4 +1,4 @@
-package com.example.luanabelusso.aps_android.telas;
+package com.example.luanabelusso.aps_android.telas.adapters;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +15,6 @@ public class Historico extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historico);
+        setContentView(R.layout.activity_adapter_historico);
     }
 }
