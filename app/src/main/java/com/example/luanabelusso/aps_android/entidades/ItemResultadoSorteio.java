@@ -14,9 +14,9 @@ public class ItemResultadoSorteio extends DefaultEntity {
     public static final String SORTEIO = "sorteio_id";
     public static final String RESULTADO = "resultado";
 
-    int id;
-    int sorteio;
-    int resultado;// quando for item da lista, o resultado será o index, caso seja números, será o numero sorteado
+    private int id;
+    private int sorteio;
+    private int resultado;// quando for item da lista, o resultado será o index, caso seja números, será o numero sorteado
 
     public ItemResultadoSorteio() {
         super();

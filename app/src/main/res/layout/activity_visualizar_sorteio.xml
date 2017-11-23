@@ -5,35 +5,38 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/txtSorteio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/VISUALIZAR"
         android:textSize="@dimen/text_size"
-        android:layout_gravity="center"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/ITENS_ORG"
         android:textSize="@dimen/text_size2"
-        android:layout_gravity="center"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ListView
-        android:layout_width="wrap_content"
+        android:id="@+id/lvItensSorteio"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/ITENS_POS"
         android:textSize="@dimen/text_size2"
-        android:layout_gravity="center"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ListView
-        android:layout_width="wrap_content"
+        android:id="@+id/lvItensSorteados"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 

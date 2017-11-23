@@ -23,7 +23,13 @@ public class ControllerItemResultadoSorteio extends DataBase {
     }
 
     public boolean salvarItemResultado(ItemResultadoSorteio itemResultadoSorteio) {
-        return false;
+        if (itemResultadoSorteio.getId() > 0) {
+            String where = ItemResultadoSorteio.ID + " = " + itemResultadoSorteio.getId();
+            return atualizaDados(ItemResultadoSorteio.TABELA, where, itemResultadoSorteio.getUpdateValues()) > 0;
+        } else {
+            itemResultadoSorteio.setId(insereDados(ItemResultadoSorteio.TABELA, itemResultadoSorteio.getUpdateValues()));
+            return itemResultadoSorteio.getId() > 0;
+        }
     }
 
     public ItemResultadoSorteio selecionarItemResultado(int id) {
@@ -46,13 +52,13 @@ public class ControllerItemResultadoSorteio extends DataBase {
         if (dados == null || dados.getCount() == 0)
             return aux;
         try {
-            while (dados.moveToNext()) {
+            do {
                 ItemResultadoSorteio itemResultadoSorteio = new ItemResultadoSorteio();
                 itemResultadoSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.ID)));
                 itemResultadoSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.SORTEIO)));
                 itemResultadoSorteio.setResultado(dados.getInt(dados.getColumnIndexOrThrow(ItemResultadoSorteio.RESULTADO)));
                 aux.add(itemResultadoSorteio);
-            }
+            } while (dados.moveToNext());
             return aux;
         } finally {
             dados.close();

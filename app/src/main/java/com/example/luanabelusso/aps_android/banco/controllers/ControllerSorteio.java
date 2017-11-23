@@ -43,12 +43,8 @@ public class ControllerSorteio extends DataBase {
             String where = Sorteio.ID + " = " + sorteio.getId();
             result = atualizaDados(Sorteio.TABELA, where, sorteio.getUpdateValues()) > 0;
         } else {
-            long count = insereDados(Sorteio.TABELA, sorteio.getUpdateValues());
-            if (count > 0) {
-                sorteio.setId(selecionarUltimoIdCriado());
-                result = true;
-            }
-            result = false;
+            sorteio.setId(insereDados(Sorteio.TABELA, sorteio.getUpdateValues()));
+            result = sorteio.getId() > 0;
         }
         if (result) {
             for (ItemSorteio itemSorteio : sorteio.getItensSorteio()) {
@@ -95,7 +91,7 @@ public class ControllerSorteio extends DataBase {
         Cursor dados = selecionar(Sorteio.TABELA, "", new Sorteio().getAllFields());
         if (dados == null || dados.getCount() == 0)
             return aux;
-        while (dados.moveToNext()) {
+        do {
             Sorteio sorteio = new Sorteio();
             sorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.ID)));
             sorteio.setQntResultados(dados.getInt(dados.getColumnIndexOrThrow(Sorteio.QNT_RESULTADOS)));
@@ -107,7 +103,7 @@ public class ControllerSorteio extends DataBase {
             sorteio.setItensSorteio(ControllerItemSorteio.getInstance().getListaItens(sorteio.getId()));
             sorteio.setItensResultado(ControllerItemResultadoSorteio.getInstance().getListaItensResultado(sorteio.getId()));
             aux.add(sorteio);
-        }
+        } while (dados.moveToNext());
         return aux;
     }
 }

@@ -43,10 +43,12 @@ public class DataBase extends SQLiteOpenHelper {
 
     }
 
-    protected long insereDados(String tabela, ContentValues valores) {
+    protected int insereDados(String tabela, ContentValues valores) {
         SQLiteDatabase db = getWritableDatabase();
         try {
-            return db.insert(tabela, null, valores);
+            return (int) db.insert(tabela, null, valores);
+        } catch (Exception e) {
+            return 0;
         } finally {
             db.close();
         }
@@ -79,17 +81,6 @@ public class DataBase extends SQLiteOpenHelper {
             return db.delete(tabela, where, null);
         } finally {
             db.close();
-        }
-    }
-
-    protected int selecionarUltimoIdCriado() {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT last_insert_rowid()", null);
-        cur.moveToFirst();
-        try {
-            return cur.getInt(0);
-        } finally {
-            cur.close();
         }
     }
 }

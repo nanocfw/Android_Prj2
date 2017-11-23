@@ -23,7 +23,13 @@ public class ControllerItemSorteio extends DataBase {
     }
 
     public boolean salvarItem(ItemSorteio itemSorteio) {
-        return false;
+        if (itemSorteio.getId() > 0) {
+            String where = ItemSorteio.ID + " = " + itemSorteio.getId();
+            return atualizaDados(ItemSorteio.TABELA, where, itemSorteio.getUpdateValues()) > 0;
+        } else {
+            itemSorteio.setId(insereDados(ItemSorteio.TABELA, itemSorteio.getUpdateValues()));
+            return itemSorteio.getId() > 0;
+        }
     }
 
     public ItemSorteio selecionarItem(int id) {
@@ -46,13 +52,13 @@ public class ControllerItemSorteio extends DataBase {
         if (dados == null || dados.getCount() == 0)
             return aux;
         try {
-            while (dados.moveToNext()) {
+            do {
                 ItemSorteio itemSorteio = new ItemSorteio();
                 itemSorteio.setId(dados.getInt(dados.getColumnIndexOrThrow(ItemSorteio.ID)));
                 itemSorteio.setSorteio(dados.getInt(dados.getColumnIndexOrThrow(ItemSorteio.SORTEIO)));
                 itemSorteio.setDescricao(dados.getString(dados.getColumnIndexOrThrow(ItemSorteio.DESCRICAO)));
                 aux.add(itemSorteio);
-            }
+            } while (dados.moveToNext());
             return aux;
         } finally {
             dados.close();

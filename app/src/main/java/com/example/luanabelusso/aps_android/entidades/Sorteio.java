@@ -27,15 +27,15 @@ public class Sorteio extends DefaultEntity {
     public static final String CRITERIO_ALEATORIO = "criterio_aleatorio";
     public static final String DATA_SORTEIO = "data_sorteio";
 
-    int id;
-    int qntResultados;
-    int vlMinimo;
-    int vlMaximo;
-    TipoCriterio tipoCriterio;
-    boolean criterioAleatorio;
-    Date dataSorteio;
-    List<ItemSorteio> itensSorteio;
-    List<ItemResultadoSorteio> itensResultado;
+    private int id;
+    private int qntResultados;
+    private int vlMinimo;
+    private int vlMaximo;
+    private TipoCriterio tipoCriterio;
+    private boolean criterioAleatorio;
+    private Date dataSorteio;
+    private List<ItemSorteio> itensSorteio;
+    private List<ItemResultadoSorteio> itensResultado;
 
     public Sorteio() {
         super();
@@ -93,6 +93,17 @@ public class Sorteio extends DefaultEntity {
             else
                 aux.add(itensSorteio.get(r).getDescricao());
         }
+        return aux;
+    }
+
+    public ArrayList<String> getStringItens() {
+        ArrayList<String> aux = new ArrayList<>();
+        if (tipoCriterio == TipoCriterio.NUMEROS_ALEATORIOS)
+            return aux;
+
+        for (int i = 0; i < itensSorteio.size(); i++)
+            aux.add(itensSorteio.get(i).getDescricao());
+
         return aux;
     }
 }
