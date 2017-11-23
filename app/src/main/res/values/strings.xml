@@ -26,4 +26,6 @@
     <string name="BTN_SORTEAR">Sortear</string>
     <string name="BTN_NOVOSORTEIO">Novo Sorteio</string>
     <string name="ADICIONAR">Adicionar</string>
+    <string name="HIST">Histórico</string>
+    <string name="DATA_CRITERIO">Data E Critério:</string>
 </resources>

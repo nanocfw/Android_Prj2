@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/HIST"
+        android:textSize="@dimen/text_size"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DATA_CRITERIO"
+        android:textSize="@dimen/text_size"
+        android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+        android:layout_gravity="left"
+        android:textStyle="bold"/>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/itens_sorteio_text_margin_end"
+            android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left"
+            android:layout_marginRight="@dimen/itens_sorteio_text_margin_right"
+            android:layout_marginStart="@dimen/itens_sorteio_text_margin_left"
+            android:text="Data"
+            android:textColor="@color/itens_sorteio_text_color" />
+
+        <TextView
+            android:id="@+id/txtDescricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/itens_sorteio_text_margin_left3"
+            android:layout_marginRight="@dimen/itens_sorteio_text_margin_right"
+            android:text="Critério"
+            android:textColor="@color/itens_sorteio_text_color" />
+
+        <ImageButton
+            android:id="@+id/btnEditar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_send_black_18dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
